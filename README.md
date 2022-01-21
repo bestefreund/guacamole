@@ -23,6 +23,8 @@ sed -i 's/<ignoreLicenseErrors>false<\/ignoreLicenseErrors>/<ignoreLicenseErrors
 # Build custom guacamole image
 docker build -t guacamole .
 
+cd ..
+
 # Set sensitive data
 LDAP_SEARCH_BIND_PASSWORD=""
 MYSQL_PASSWORD="$(echo $RANDOM | md5sum | head -c 20; echo;)"
@@ -33,5 +35,3 @@ sed -i "s/GUAC_ADM_PASSWORD/${GUAC_ADM_PASSWORD}/g" ./mysql/2_users_groups.sql
 
 docker-compose up -d
 ```
-
-You can add further connection & user configurations to the mysql-scripts

@@ -1,0 +1,67 @@
+networks:
+  network:
+    driver: bridge
+
+services:
+  guacd:
+    image: 'guacamole/guacd:1.4.0'
+    networks:
+      - network
+    restart: always
+    hostname: 'guacd'
+    container_name: 'guacd'
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+
+  guacamole-sql:
+    image: 'mysql:8'
+    networks:
+      - network
+    restart: always
+    hostname: 'guacamole-sql'
+    container_name: 'guacamole-sql'
+    environment:
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - './mysql:/docker-entrypoint-initdb.d'
+
+  guacamole:
+    image: 'guacamole'
+    networks:
+      - network
+    restart: always
+    hostname: 'guacamole'
+    container_name: 'guacamole'
+    ports:
+      - 8443:8443
+      - 8080:8080
+    environment:
+      GUACD_HOSTNAME: guacd
+      HOST_NAME: "${HOST_NAME}"
+      DOMAIN_NAME: "${DOMAIN_NAME}"
+      LDAP_CERT_DN: "${LDAP_CERT_DN}"
+      LDAP_HOSTNAME: "${LDAP_HOSTNAME}"
+      LDAP_PORT: "${LDAP_PORT}"
+      LDAP_ENCRYPTION_METHOD: "${LDAP_ENCRYPTION_METHOD}"
+      LDAP_SEARCH_BIND_DN: "${LDAP_SEARCH_BIND_DN}"
+      LDAP_SEARCH_BIND_PASSWORD: "${LDAP_SEARCH_BIND_PASSWORD}"
+      LDAP_USER_BASE_DN: "${LDAP_USER_BASE_DN}"
+      LDAP_USERNAME_ATTRIBUTE: "${LDAP_USERNAME_ATTRIBUTE}"
+      LDAP_GROUP_BASE_DN: "${LDAP_GROUP_BASE_DN}"
+      LDAP_GROUP_NAME_ATTRIBUTE: "${LDAP_GROUP_NAME_ATTRIBUTE}"
+      LDAP_CONFIG_BASE_DN: "${LDAP_CONFIG_BASE_DN}"
+      LDAP_USER_SEARCH_FILTER: "${LDAP_USER_SEARCH_FILTER}"
+      MYSQL_HOSTNAME: "guacamole-sql"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      JAVA_OPTS: "${JAVA_OPTS}"
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+    depends_on:
+      - guacd
+      - guacamole-sql

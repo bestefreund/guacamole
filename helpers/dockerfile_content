@@ -1,0 +1,6 @@
+COPY server.xml /usr/local/tomcat/conf/
+COPY guacamolessl-entrypoint.sh /opt/guacamole/bin/
+
+ENTRYPOINT ["/opt/guacamole/bin/guacamolessl-entrypoint.sh"]
+
+EXPOSE 8443

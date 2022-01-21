@@ -6,11 +6,11 @@ This is a Guacamole Docker Deployment containing Guacamole 1.4.0 on Tomcat 9 wit
 # Fill in the values to the Variables in the .env-file
 
 # Get this repo
-git clone --branch 1.4.0 git@gitlab.bjoern-freund.de:docker/guacamole.git
+git clone git@gitlab.bjoern-freund.de:docker/guacamole.git
 cd guacamole
 
 # Get Guacamole-Client
-git clone https://github.com/apache/guacamole-client.git
+git clone --branch 1.4.0 https://github.com/apache/guacamole-client.git
 
 # Configure Guacamole-Client
 cp ./server.xml ./guacamolessl-entrypoint.sh ./guacamole-client/

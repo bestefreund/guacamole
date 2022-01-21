@@ -33,3 +33,5 @@ sed -i "s/GUAC_ADM_PASSWORD/${GUAC_ADM_PASSWORD}/g" ./mysql/2_users_groups.sql
 
 docker-compose up -d
 ```
+
+You can add further connection & user configurations to the mysql-scripts

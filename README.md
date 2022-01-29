@@ -1,6 +1,6 @@
 Guacamole
 
-This is a Guacamole Docker Deployment containing Guacamole 1.4.0 on Tomcat 9 with LDAP-SSL & MySQL 8
+This is a Guacamole Docker Deployment containing Guacamole 1.4.0 on Tomcat 9 with SSL, LDAP-SSL & MySQL 8
 
 ```
 # Fill in the values to the Variables in the .env-file

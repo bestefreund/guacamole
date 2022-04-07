@@ -6,7 +6,7 @@ This is a Guacamole Docker Deployment containing Guacamole 1.4.0 on Tomcat 9 wit
 # Fill in the values to the Variables in the .env-file
 
 # Get this repo
-git clone git@gitlab.bjoern-freund.de:docker/guacamole.git
+git clone https://github.com/bestefreund/guacamole.git
 cd guacamole
 
 # Get Guacamole-Client

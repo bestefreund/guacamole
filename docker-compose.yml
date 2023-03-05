@@ -4,7 +4,7 @@ networks:
 
 services:
   guacd:
-    image: 'guacamole/guacd:1.4.0'
+    image: 'guacamole/guacd:1.5.0'
     networks:
       - network
     restart: always

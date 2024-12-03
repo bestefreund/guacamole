@@ -10,7 +10,7 @@ git clone https://github.com/bestefreund/guacamole.git
 cd guacamole
 
 # Get Guacamole-Client
-git clone --branch 1.4.0 https://github.com/apache/guacamole-client.git
+git clone --branch 1.5.5 https://github.com/apache/guacamole-client.git
 
 # Configure Guacamole-Client
 cp ./server.xml ./guacamolessl-entrypoint.sh ./guacamole-client/

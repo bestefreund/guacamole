@@ -33,7 +33,8 @@ else
     -starttls ldap \
     -connect "${LDAP_HOSTNAME}:${LDAP_PORT}" \
     -showcerts 2> /dev/null \
-    | openssl x509 -out "${security_path}/ldap.cert" > /dev/null
+    | sed -n "/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p" \
+    > "${security_path}/ldap.cert"
 
   echo "Importing LDAP-cert..."
   keytool -storepasswd \

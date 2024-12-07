@@ -19,6 +19,7 @@ sed -i 's/ARG TOMCAT_VERSION=8.5/ARG TOMCAT_VERSION=9/g' Dockerfile
 sed -i -e '/EXPOSE 8080/{r ../helpers/dockerfile_content' -e 'd}' Dockerfile
 sed -i '/USER guacamole/d' Dockerfile
 sed -i 's/<ignoreLicenseErrors>false<\/ignoreLicenseErrors>/<ignoreLicenseErrors>true<\/ignoreLicenseErrors>/g' pom.xml
+sed -i 's/exec catalina.sh run/exec /usr/local/tomcat/catalina.sh run/g' ./guacamole-docker/bin/start.sh
 
 # Build custom guacamole image
 docker build -t guacamole .

@@ -40,7 +40,7 @@ else
   keytool -storepasswd \
     -new "${random2}" \
     -keystore "${security_path}/cacerts" \
-    -storepass "${random1}"
+    -storepass "changeit"
 
   echo "yes" | keytool -importcert \
     -alias ldap \

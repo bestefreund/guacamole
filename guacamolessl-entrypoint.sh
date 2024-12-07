@@ -50,4 +50,14 @@ else
     -storepass "${random2}" > /dev/null
 fi
 
+catalina_dest_path="/usr/local/tomcat/bin/catalina.sh"
+catalina_run_path="/usr/local/tomcat/catalina.sh"
+
+
+if [ ! -f "${catalina_path}" ]; then
+  ln -s \
+    "${catalina_run_path}" \
+    "../bin/catalina.sh"
+fi
+
 su -s /bin/bash -c "$@" guacamole

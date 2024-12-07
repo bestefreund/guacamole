@@ -4,6 +4,29 @@ SET @usersEntityID = (SELECT entity_id FROM guacamole_entity WHERE name = 'Guaca
 SET @connectionAdminsGID = (SELECT connection_group_id FROM guacamole_connection_group WHERE connection_group_name = 'Administrative');
 SET @adminsEntityID = (SELECT entity_id FROM guacamole_entity WHERE name = 'GuacamoleAdmins' AND type = 'USER_GROUP');
 
+-- Administrative RDP Terminal
+INSERT INTO guacamole_connection (connection_name, protocol, parent_id) VALUES ('Peter@RDP Terminal', 'rdp', @connectionAdminsGID);
+SET @id = LAST_INSERT_ID();
+INSERT INTO guacamole_connection_permission (entity_id, connection_id)
+VALUES (@adminsEntityID, @id);
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'hostname', 'Terminal');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'port', '3389');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'username', 'peter');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'disable-audio', 'true');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'console', 'true');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'server-layout', 'de-de-qwertz');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'ignore-cert', 'true');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'enable-drive', 'false');
+
+-- Administrative SSH Terminal
+INSERT INTO guacamole_connection (connection_name, protocol, parent_id) VALUES ('Peter@SSH Terminal', 'ssh', @connectionAdminsGID);
+SET @id = LAST_INSERT_ID();
+INSERT INTO guacamole_connection_permission (entity_id, connection_id)
+VALUES (@adminsEntityID, @id);
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'hostname', 'Terminal');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'port', '22');
+INSERT INTO guacamole_connection_parameter VALUES (@id, 'username', 'peter');
+
 -- RDP Terminal
 INSERT INTO guacamole_connection (connection_name, protocol, parent_id) VALUES ('RDP Terminal', 'rdp', @connectionUsersGID);
 SET @id = LAST_INSERT_ID();

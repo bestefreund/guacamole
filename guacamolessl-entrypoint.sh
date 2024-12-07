@@ -57,7 +57,6 @@ if [ ! -f "${catalina_run_path}" ]; then
   ln -s \
     "${catalina_dest_path}" \
     "${catalina_run_path}"
-    
 fi
 
 su -s /bin/bash -c "$@" guacamole

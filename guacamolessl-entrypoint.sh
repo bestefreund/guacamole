@@ -54,8 +54,9 @@ catalina_dest_path="/usr/local/tomcat/bin/catalina.sh"
 catalina_run_path="/usr/local/tomcat/catalina.sh"
 if [ ! -f "${catalina_run_path}" ]; then
   ln -s \
-    "${catalina_run_path}" \
-    "${catalina_dest_path}"
+    "${catalina_dest_path}" \
+    "${catalina_run_path}"
+    
 fi
 
 su -s /bin/bash -c "$@" guacamole
